@@ -23,7 +23,7 @@ An intelligent coding assistant that breaks down complex snippets into digestibl
 
 ### 1. Clone the repository
 ```bash
-git clone [https://github.com/your-username/ai-code-explainer.git](https://github.com/your-username/ai-code-explainer.git)
+git clone [https://github.com/vandy02/Codesplain.git](https://github.com/Vandy02/Codesplain.git)
 cd ai-code-explainer
 ```
 
