@@ -3,10 +3,12 @@
 export async function explain(prevState, formData) {
     const code = formData.get("code")
     const language = formData.get("language")
+    const level = formData.get("level")
 
     const inputs = {
         code,
-        language
+        language,
+        level
     }
     
     try{
@@ -15,7 +17,7 @@ export async function explain(prevState, formData) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ code, language }),
+            body: JSON.stringify({ code, language, level }),
         });
     
     if(!res.ok){

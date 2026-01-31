@@ -30,27 +30,40 @@ app.use(limiter);
 
 
 
-const API_KEY = process.env.NEBIUS_API_KEY; 
+const API_KEY = process.env.NEBIUS_API_KEY;
 //console.log("NEBIUS_API_KEY exists:", !!process.env.NEBIUS_API_KEY);
 //console.log("NEBIUS_API_KEY length:", process.env.NEBIUS_API_KEY?.length);
 
 
 const client = new OpenAI({
-    baseURL:'https://api.tokenfactory.nebius.com/v1/',
+    baseURL: 'https://api.tokenfactory.nebius.com/v1/',
     apiKey: API_KEY,
 });
 
 app.post("/api/explain-code", async (req, res) => {
     try {
-        const { code, language } = req.body;
-        if(!code){
+        const { code, language, level } = req.body;
+        if (!code) {
             return res.status(400).json({ error: "Code is required" });
+        }
+
+        let levelInstruction = "";
+        if (level === "Beginner") {
+            levelInstruction = "Explain like I'm five. Use simple analogies (like recipes or legos) and avoid technical jargon.";
+        } else if (level === "Senior") {
+            levelInstruction = "Explain like a professional.";
+        } else {
+            levelInstruction = "Explain for an Intermediate developer. Balance technical terms with clear logic.";
         }
 
         const messages = [
             {
+                role: "system",
+                content: `You are a helpful coding assistant. ${levelInstruction} Explain the code clearly using standard Markdown. Do not over-format every single variable name.`
+            },
+            {
                 role: "user",
-                content: `Explain this ${language || ""} code in simple terms: \n\n\`\`\` ${language || ""}\n${code}\n\`\`\``
+                content: `Explain this ${language || "programming"} code in simple terms: \n\n${code}`
             },
         ];
 
@@ -58,14 +71,14 @@ app.post("/api/explain-code", async (req, res) => {
             model: "openai/gpt-oss-120b",
             messages,
             temperature: 0.3,
-            max_tokens: 800,
+            max_tokens: 1000,
         });
         const explanation = response?.choices[0]?.message?.content;
-        if(!explanation){
+        if (!explanation) {
             return res.status(500).json({ error: "Error explaining code" });
         }
-        res.json({ explanation , language: language || "unknown" });
-    } 
+        res.json({ explanation, language: language || "unknown" });
+    }
     catch (err) {
         console.error("Error explaining code:", err);
         res.status(500).json({ error: "Server Error", details: err.message });
