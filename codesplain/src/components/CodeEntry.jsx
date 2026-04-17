@@ -3,7 +3,7 @@ import CodeExplainForms from "./forms/CodeExplainForms"
 
 const CodeEntry = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col justify-center items-center">
         <Header />
         <CodeExplainForms /></div>
   )
