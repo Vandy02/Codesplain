@@ -12,7 +12,7 @@ export async function explain(prevState, formData) {
     }
     
     try{
-        const res =await fetch(`${import.meta.env.VITE_API_BASE_URL}/explain-code`, {
+        const res =await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/explain-code`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
