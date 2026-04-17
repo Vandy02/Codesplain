@@ -38,7 +38,7 @@ const CodeExplainForms = () => {
                     </div>
                 </div>
                 <label className="block mb-2 text-sm font-medium text-gray-900">Your Code:</label>
-                <textarea name='code' required placeholder="Enter your code here" className="w-full p-2 border border-gray-300 rounded-md" rows="10"
+                <textarea name='code' required placeholder="Enter your code here" className="w-full p-2 border border-gray-300 rounded-md bg-white text-gray-900" rows="10"
                     defaultValue={formState?.inputs?.code || ""}></textarea>
                 <button type="submit" disabled={isPending} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"> {isPending ? "Explaining..." : "Explain Code"}</button>
             </form>
