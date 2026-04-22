@@ -44,7 +44,12 @@ const CodeExplainForms = () => {
             </form>
             {isPending ? (
                 <div className="mt-8 p-4 border border-blue-100 bg-blue-50 rounded-lg animate-pulse">
+                <span className="text-3xl mb-2 animate-bounce">✨🤖✨</span>
                 <p className="mt-4 text-sm text-gray-500">Thinking...</p>
+                <p className="font-bold text-lg">Decoding the matrix...</p>
+                <p className="text-sm mt-1 opacity-80">
+                  (Using the free tier so this might take about 30 seconds. Perfect time to grab a sip of coffee or tea! ☕)
+                </p>
                 </div>
             ) : formState?.success ? (
                 <div className="mt-8">
